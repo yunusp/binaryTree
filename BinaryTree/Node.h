@@ -1,26 +1,32 @@
 #pragma once
+#include"ExceptionHandler.h"
 #include<string>
 #include<array>
 
-/*maybe i should define parents can children outside but have them associated here?
+/*maybe i should define parents and children outside but have them associated here?
 */
 
 class Node {
 private:
 	int index = 0;
 	std::string value;
+	bool isTerminalNode = false; //might be useful
 	int leftChild = 0, rightChild = 0, parent = 0;
 	//void setParent(int index); // not required
 	//void setChildren();  //not required
-	struct Children {
-		int leftChild = 0, rightChild = 1;
-	};
-	Children children; // this struct is not useful but im keeping it should it be useful later
+
 
 
 public:
+	struct Children {
+		std::string leftChild = "left";
+		std::string rightChild = "right";
+	}; // this struct is not useful but im keeping it should it be useful later
+	static Children children;
+
+	Node() { value = "0"; index = 0; }; //default constructor
 	Node(int index); // construct with an index
-	Node(int index, int parentIndex, int rightChildIndex, int leftChildIndex, std::string val); // maybe this will be useful
+	Node(int index, int parentIndex, int rightChildIndex, int leftChildIndex, std::string val = ""); // maybe this will be useful
 	Node(Node& o); // copy constructor
 	Node(int index, std::string val); //construct with a value
 
@@ -43,6 +49,7 @@ public:
 
 Node::Node(int index) {
 	this->index = index; // put index;
+	this->value = std::string(NULL);
 }
 Node::Node(int index, std::string val) {
 	this->index = index; //put index
@@ -51,14 +58,14 @@ Node::Node(int index, std::string val) {
 Node::Node(Node& o) {
 	this->value = o.value; //copy value not index
 }
-
-Node::Node(int index, int parentIndex, int rightChildIndex, int leftChildIndex, std::string val) { // set all indices 
+Node::Node(int index, int parentIndex, int rightChildIndex, int leftChildIndex, std::string val = std::string(NULL)) { // set all indices 
 	this->index = index;
 	this->parent = parentIndex;
 	this->leftChild = leftChildIndex;
 	this->rightChild = rightChildIndex;
 	this->value = val;
 }
+
 
 void Node::setIndex(int index) {
 	this->index = index;
