@@ -3,6 +3,7 @@
 #include<string>
 #include<array>
 
+
 /*maybe i should define parents and children outside but have them associated here?
 */
 
@@ -18,17 +19,22 @@ private:
 
 
 public:
-	struct Children {
+
+	static struct Children {
 		std::string leftChild = "left";
 		std::string rightChild = "right";
-	}; // this struct is not useful but im keeping it should it be useful later
-	static Children children;
+	}children;
 
-	Node() { value = "0"; index = 0; }; //default constructor
-	Node(int index); // construct with an index
-	Node(int index, int parentIndex, int rightChildIndex, int leftChildIndex, std::string val = ""); // maybe this will be useful
-	Node(Node& o); // copy constructor
-	Node(int index, std::string val); //construct with a value
+	//default constructor
+	Node() { value = "0"; index = 0; }; 
+	// construct with an index
+	Node(int index); 
+
+	Node(int index, int parentIndex, int rightChildIndex, int leftChildIndex, std::string val = std::string(NULL)); // maybe this will be useful
+	// copy constructor
+	Node(Node& o); 
+	//construct with a value
+	Node(int index, std::string val); 
 
 	void setVal(std::string str) { this->value = str; }
 	void setParentIndex(int index) { this->parent = index; }
@@ -36,10 +42,14 @@ public:
 	void setRightChildIndex(int index) { this->rightChild = index; }
 
 	//std::string getVal(Children child); //get value for a given child //I do not think this should be there as it should be provided by the tree class
-	std::string getVal() { return this->value; } // get value of this index eg. Node n(1,"hello"); n.getVal();
+
+	// get value of this index eg. Node n(1,"hello"); n.getVal();
+	std::string getVal() { return this->value; } 
 
 	//int* getIndices(std::string val); // get indices for a given value //i also dont think this should be implemented here
-	void setIndex(int index); //manually set index. use only if using copy constructor.
+	
+	//manually set index. use only if using copy constructor.
+	void setIndex(int index); 
 
 	//std::array<std::string, 2> getChildren(int index); //get children for a given index //this is not required too
 
@@ -58,7 +68,7 @@ Node::Node(int index, std::string val) {
 Node::Node(Node& o) {
 	this->value = o.value; //copy value not index
 }
-Node::Node(int index, int parentIndex, int rightChildIndex, int leftChildIndex, std::string val = std::string(NULL)) { // set all indices 
+Node::Node(int index, int parentIndex, int rightChildIndex, int leftChildIndex, std::string val) { // set all indices 
 	this->index = index;
 	this->parent = parentIndex;
 	this->leftChild = leftChildIndex;
@@ -70,4 +80,3 @@ Node::Node(int index, int parentIndex, int rightChildIndex, int leftChildIndex, 
 void Node::setIndex(int index) {
 	this->index = index;
 }
-

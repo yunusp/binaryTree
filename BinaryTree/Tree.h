@@ -28,11 +28,11 @@ public:
 
 	std::string getVal(int node, int child); // convert all returned values to string as i cant overload based on return type.
 
-	std::string* search(int val);
+	/*std::string* search(int val);
 	std::string* search(float val);
 	std::string* search(double val);
 	std::string* search(const char* val);
-
+*/
 	std::array<std::string, 2> getChildren(int node);
 
 	int* getNode(std::string val);
@@ -150,7 +150,7 @@ std::string Tree::getVal(int node, int child) {
 	}
 }
 
-std::string* Tree::search(int val) {
+/*std::string* Tree::search(int val) {
 	int times = 0;
 	int ptr = 0;
 	std::string s = std::to_string(val);
@@ -233,7 +233,7 @@ std::string* Tree::search(const char* val) {
 		}
 	}
 	return results;
-}
+}*/
 
 std::array<std::string, 2> Tree::getChildren(int node) {
 	std::array<std::string, 2> children;

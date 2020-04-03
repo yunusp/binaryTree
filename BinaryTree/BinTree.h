@@ -20,7 +20,9 @@ public:
 
 	void overRideNode(int index, std::string child, std::string val);
 
+	std::string getNode(int index, std::string child = "none");
 
+	int* getChildIndex(int index);
 
 };
 
@@ -67,13 +69,40 @@ BinaryTree::BinaryTree(int startIndex,std::string val) {
 }
 
 void BinaryTree::overRideNode(int index, std::string child, std::string val) {
-	if (child != Node::children.leftChild || child != Node::children.rightChild)
+	if (child != Node::children.leftChild || child != Node::children.rightChild||child!=std::string("none"))
 		throw ExceptionHandler::InvalidChildException(child);
 
-	if (child == Node::children.rightChild) {
+	if (child == std::string("none")) {
+		tree[index].setVal(val);
+	}else if (child == Node::children.rightChild) {
 		tree[2 * index + 1].setVal(val);
 	}
 	else if (child == Node::children.leftChild) {
 		tree[2 * index].setVal(val);
 	}
+}
+
+std::string BinaryTree::getNode(int index, std::string child) {
+	
+	if (child != Node::children.leftChild || child != Node::children.rightChild || child != std::string("none")) {
+		throw ExceptionHandler::InvalidChildException(child);
+		return "0";
+	}
+	if (child == std::string("none")) {
+		return tree[index].getVal();
+	}
+	else if (child == std::string(Node::children.leftChild)) {
+		return tree[2 * index].getVal();
+	}
+	else if (child == std::string(Node::children.rightChild)) {
+		return tree[2 * index + 1].getVal();
+	}
+}
+
+int* BinaryTree::getChildIndex(int index) {
+	int* results = new int[2];
+	results[0] = 2 * index;
+	results[1] = 2 * index + 1;
+
+	return results;
 }

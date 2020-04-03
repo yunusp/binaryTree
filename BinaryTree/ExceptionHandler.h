@@ -21,7 +21,7 @@ namespace ExceptionHandler {
 		char string[200];
 		int index;
 
-		NodeNotFoundException() { *str = 0, index = 0; }
+		NodeNotFoundException() { *string = 0, index = 0; }
 		NodeNotFoundException(const char* s, int i) {
 			strcpy_s(string, s);
 			index = i;
