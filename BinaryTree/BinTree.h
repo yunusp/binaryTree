@@ -18,7 +18,18 @@ public:
 	BinaryTree(int startIndex, std::string val); // nodes initialized with custom value and starts at index
 	BinaryTree(int startIndex); // start from custom index
 
+
 	void overRideNode(int index, std::string child, std::string val);
+	void overRideNode(int index, std::string child, int val);
+	void overRideNode(int index, std::string child, float val);
+	void overRideNode(int index, std::string child, double val);
+	void overRideNode(int index, std::string child, long val);
+	void overRideNode(int index, std::string child, char val);
+	void overRideNode(int index, std::string child, char* val);
+	//void overRideNode(int index, std::string child, long int val);
+
+	void pushNode(int index, std::string child, std::string val);
+
 
 	std::string getNode(int index, std::string child = "none");
 
@@ -69,22 +80,53 @@ BinaryTree::BinaryTree(int startIndex,std::string val) {
 }
 
 void BinaryTree::overRideNode(int index, std::string child, std::string val) {
-	if (child != Node::children.leftChild || child != Node::children.rightChild||child!=std::string("none"))
+
+	if (child != Node::children.leftChild && child != Node::children.rightChild && child!=std::string("none"))
 		throw ExceptionHandler::InvalidChildException(child);
 
 	if (child == std::string("none")) {
 		tree[index].setVal(val);
-	}else if (child == Node::children.rightChild) {
+	}
+	else if (child == Node::children.rightChild) {
 		tree[2 * index + 1].setVal(val);
 	}
 	else if (child == Node::children.leftChild) {
 		tree[2 * index].setVal(val);
 	}
 }
+void BinaryTree::overRideNode(int index, std::string child, int val) {
+	std::string str = std::to_string(val);
+	overRideNode(index, child, str);
+}
+void BinaryTree::overRideNode(int index, std::string child, float val) {
+	std::string str = std::to_string(val);
+	overRideNode(index, child, str);
+}
+void BinaryTree::overRideNode(int index, std::string child, double val) {
+	std::string str = std::to_string(val);
+	overRideNode(index, child, str);
+}
+void BinaryTree::overRideNode(int index, std::string child, char val) {
+	std::string str = std::to_string(val);
+	overRideNode(index, child, str);
+}
+void BinaryTree::overRideNode(int index, std::string child, char* val) {
+	std::string str = val;
+	overRideNode(index, child, str);
+}
+void BinaryTree::overRideNode(int index, std::string child, long val) {
+	std::string str = std::to_string(val);
+	overRideNode(index, child, str);
+}
+/*void BinaryTree::overRideNode(int index, std::string child, long int val) {
+	std::string str = std::to_string(val);
+	overRideNode(index, child, str);
+}*/
+
 
 std::string BinaryTree::getNode(int index, std::string child) {
 	
-	if (child != Node::children.leftChild || child != Node::children.rightChild || child != std::string("none")) {
+	if (child.compare(Node::children.leftChild) != 0 && child.compare(Node::children.rightChild) != 0 && child.compare(std::string("none")) != 0) {
 		throw ExceptionHandler::InvalidChildException(child);
 		return "0";
 	}
@@ -105,4 +147,9 @@ int* BinaryTree::getChildIndex(int index) {
 	results[1] = 2 * index + 1;
 
 	return results;
+}
+
+
+void BinaryTree::pushNode(int index, std::string child, std::string val) {
+	if(getNode(index,child) != "0" ){}
 }

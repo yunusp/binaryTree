@@ -20,13 +20,15 @@ private:
 
 public:
 
+	static std::string initVal;
+
 	static struct Children {
 		std::string leftChild = "left";
 		std::string rightChild = "right";
 	}children;
 
 	//default constructor
-	Node() { value = "0"; index = 0; }; 
+	Node() { value = initVal; index = 0; }; 
 	// construct with an index
 	Node(int index); 
 
@@ -40,6 +42,7 @@ public:
 	void setParentIndex(int index) { this->parent = index; }
 	void setLeftChildIndex(int index) { this->leftChild = index; }
 	void setRightChildIndex(int index) { this->rightChild = index; }
+
 
 	//std::string getVal(Children child); //get value for a given child //I do not think this should be there as it should be provided by the tree class
 
@@ -59,7 +62,7 @@ public:
 
 Node::Node(int index) {
 	this->index = index; // put index;
-	this->value = std::string(NULL);
+	this->value = initVal;
 }
 Node::Node(int index, std::string val) {
 	this->index = index; //put index
